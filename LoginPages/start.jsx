@@ -1,102 +1,200 @@
-import { Text, View, Image, TouchableOpacity, StyleSheet } from "react-native";
+import React from "react";
+import { Text, View, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
+import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function LandingScreen({navigation}) {
+const { width } = Dimensions.get("window");
+
+export default function LandingScreen({ navigation }) {
+  let [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null; // or a loading spinner
+  }
+
   return (
-    <View style={styles.container}>
-      {/* Image with overlay */}
-      <View style={styles.imageWrapper}>
+    <SafeAreaView style={styles.container}>
+      {/* Top Banner Section */}
+      <View style={styles.bannerContainer}>
         <Image
           source={require('../assets/images/meda.png')}
           style={styles.image}
           resizeMode="cover"
         />
-        <View style={styles.overlay} /> 
+        <View style={styles.overlay} />
+
+        {/* Logo and Brand Text over Image */}
+        <View style={styles.brandContainer}>
+          <Text style={styles.logoText}>MEDA</Text>
+          <Text style={styles.tagline}>Health with no limits</Text>
+        </View>
+
+        {/* Wavy Divider (SVG-like effect using overlapping views or specialized styling) */}
       </View>
 
-      {/* Text content */}
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>WELCOME</Text>
-        <Text style={styles.paragraph}>
-          An amazing experience where you no longer need to spend hours looking 
-          for your medical papers as you now go with them in your phone
+      {/* Content Section */}
+      <View style={styles.contentContainer}>
+        <Text style={styles.welcomeText}>WELCOME</Text>
+        <Text style={styles.description}>
+          An amazing experience where you no longer need to spend hours looking for your medical papers as you now go with them in your phone
         </Text>
-      </View>
 
-      {/* Buttons */}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate('Login')}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        {/* Buttons Section */}
+        <View style={styles.buttonWrapper}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => navigation.navigate('Login')}
+          >
+            <Text style={styles.loginButtonText}>Log In</Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={[styles.button, styles.signupButton]}
-          onPress={() => navigation.navigate('Register')}
-        >
-          <Text style={styles.buttonText}>Sign Up</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.signupButton}
+            onPress={() => navigation.navigate('Register')}
+          >
+            <Text style={styles.signupButtonText}>Sign Up</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#fff",
   },
-  imageWrapper: {
-    width: '100%',
-    borderRadius: 20,
-    overflow: 'hidden',
-    marginBottom: 30,
+  bannerContainer: {
+    height: "55%",
+    width: "100%",
+    position: "relative",
   },
   image: {
-    resizeMode: 'cover',
+    width: "100%",
+    height: "100%",
   },
   overlay: {
-    ...StyleSheet.absoluteFillObject, // covers the whole image
-    backgroundColor: 'rgba(0, 128, 255, 0.4)', // semi-transparent blue overlay
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "#0000007D", // Slight blue semi-transparent overlay
   },
-  textContainer: {
-    alignItems: 'center',
-    marginBottom: 30,
+  brandContainer: {
+    position: "absolute",
+    top: "40%",
+    left: 0,
+    right: 0,
+    alignItems: "center",
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: '#007AFF',
-    marginBottom: 10,
+  logoText: {
+    fontSize: 48,
+    fontWeight: "bold",
+    color: "#fff",
+    fontFamily: "serif", // Fallback for serif
+    letterSpacing: 2,
   },
-  paragraph: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#333',
-    lineHeight: 22,
+  tagline: {
+    fontSize: 14,
+    color: "#fff",
+    marginTop: 5,
+    fontFamily: "monospace", // Giving it that digital look
   },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
+  wavyDivider: {
+    position: "absolute",
+    bottom: -1,
+    width: "100%",
+    height: 60,
+    overflow: "hidden",
   },
-  button: {
+  wave1: {
+    position: "absolute",
+    bottom: -40,
+    left: -50,
+    width: width * 0.8,
+    height: 100,
+    backgroundColor: "#fff",
+    borderRadius: 70,
+    transform: [{ scaleX: 2 }],
+  },
+  wave2: {
+    position: "absolute",
+    bottom: -60,
+    right: -50,
+    width: width * 0.8,
+    height: 120,
+    backgroundColor: "#fff",
+    borderRadius: 80,
+    transform: [{ scaleX: 2 }],
+  },
+  contentContainer: {
     flex: 1,
-    backgroundColor: '#007AFF',
-    paddingVertical: 15,
-    borderRadius: 12,
-    alignItems: 'center',
-    marginHorizontal: 5,
+    alignItems: "center",
+    paddingHorizontal: 40,
+    paddingTop: 32,
+  },
+  welcomeText: {
+    fontSize: 42,
+    fontWeight: "700",
+    color: "#000",
+    fontFamily: "serif",
+    marginBottom: 20,
+  },
+  description: {
+    fontSize: 14,
+    color: "#666",
+    textAlign: "center",
+    lineHeight: 22,
+    marginBottom: 10,
+    fontFamily: "Inter_400Regular",
+  },
+  buttonWrapper: {
+    width: "100%",
+    flexDirection: "row",
+    gap: 16,
+    marginTop: 10,
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  loginButton: {
+    width: "70%",
+    height: 60,
+    backgroundColor: "#000",
+    borderRadius: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 8,
+  },
+  loginButtonText: {
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
+    fontFamily: "Inter_700Bold",
   },
   signupButton: {
-    backgroundColor: '#34C759', // different color for sign up
+    width: "70%",
+    height: 60,
+    borderColor: "#000",
+    borderRadius: 30,
+    borderWidth: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 3,
+    borderWidth: 1,
   },
-  buttonText: {
-    color: '#fff',
-    fontWeight: 'bold',
-    fontSize: 16,
+  signupButtonText: {
+    color: "#000",
+    fontSize: 18,
+    fontWeight: "bold",
+    fontFamily: "Inter_700Bold",
   },
 });
