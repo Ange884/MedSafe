@@ -1,33 +1,22 @@
+import { router } from "expo-router";
 import React from "react";
 import {
-  Text,
-  View,
   Image,
-  TouchableOpacity,
   StyleSheet,
+  Text,
   TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useFonts, Inter_400Regular, Inter_700Bold } from "@expo-google-fonts/inter";
-import { router } from "expo-router";
-import { DMSerifDisplay_400Regular, DMSerifDisplay_700Bold} from "@expo-google-fonts/dm-serif-display";
 
 export default function LoginScreen() {
-  const [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
-    DMSerifDisplay_400Regular,
-    DMSerifDisplay_700Bold
-  });
-
-  if (!fontsLoaded) return null;
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Image Section */}
       <View style={styles.imageContainer}>
         <Image
-          source={require("../assets/images/meda.png")}
+          source={require("../../../assets/images/meda.png")}
           style={styles.image}
         />
       </View>
@@ -60,7 +49,7 @@ export default function LoginScreen() {
 
           <Text
             style={styles.footerText}
-            onPress={() => router.push("/signup")}
+            onPress={() => router.push("/auth/signup")}
           >
             Don’t have an account?{" "}
             <Text style={styles.link}>Sign Up</Text>
@@ -70,7 +59,7 @@ export default function LoginScreen() {
         {/* Login Button */}
         <TouchableOpacity
           style={styles.button}
-          onPress={() => router.replace("/")}
+          onPress={() => router.replace("/home")}
         >
           <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
@@ -121,27 +110,27 @@ const styles = StyleSheet.create({
   },
 
   input: {
-  height: 52,
-  width: "100%",
-  backgroundColor: "#FFFFFF",
-  borderRadius: 14,
-  paddingHorizontal: 16,
-  fontSize: 15,
-  fontFamily: "Inter_400Regular",
-  color: "#444",
+    height: 52,
+    width: "100%",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    fontSize: 15,
+    fontFamily: "Inter_400Regular",
+    color: "#444",
 
-  // Subtle border
-  borderWidth: 1,
-  borderColor: "#EFEFEF",
+    // Subtle border
+    borderWidth: 1,
+    borderColor: "#EFEFEF",
 
-  // iOS shadow
-  shadowColor: "#000",
-  shadowOpacity: 0.08,
-  shadowRadius: 6,
-  shadowOffset: { width: 0, height: 3 },
+    // iOS shadow
+    shadowColor: "#000",
+    shadowOpacity: 0.08,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
 
-  elevation: 3,
-},
+    elevation: 3,
+  },
 
 
   footerText: {
@@ -155,30 +144,30 @@ const styles = StyleSheet.create({
   link: {
     color: "#000",
     fontFamily: "Inter_700Bold",
-    
+
   },
 
- button: {
-  marginTop: 20,
-  height: 54,
-  width: "60%",
-  backgroundColor: "#000000",
-  borderRadius: 40,
-  justifyContent: "center",
-  alignItems: "center",
+  button: {
+    marginTop: 20,
+    height: 54,
+    width: "60%",
+    backgroundColor: "#000000",
+    borderRadius: 40,
+    justifyContent: "center",
+    alignItems: "center",
 
-  alignSelf: "center", // ✅ centers horizontally
+    alignSelf: "center", // ✅ centers horizontally
 
-  shadowColor: "#000",
-  shadowOpacity: 0.15,
-  shadowRadius: 6,
-  shadowOffset: { width: 0, height: 3 },
-  elevation: 4,
-},
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    shadowOffset: { width: 0, height: 3 },
+    elevation: 4,
+  },
 
   buttonText: {
     color: "#fff",
     fontSize: 18,
-    fontFamily: "DMSerifDisplay_700Bold",
+    fontFamily: "DMSerifDisplay_400Regular",
   },
 });

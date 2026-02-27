@@ -1,5 +1,5 @@
-import LandingScreen from "../../LoginPages/start";
+import { Redirect } from "expo-router";
 
 export default function MainScreen() {
-  return <LandingScreen />;
+  return <Redirect href="/auth/start" />;
 }

@@ -1,38 +1,24 @@
+import { router } from "expo-router";
 import React from "react";
 import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  StyleSheet,
   Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import {
-  useFonts,
-  Inter_400Regular,
-  Inter_700Bold,
-} from "@expo-google-fonts/inter";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
 export default function LandingScreen() {
-  let [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   return (
     <SafeAreaView style={styles.container}>
       {/* Top Banner Section */}
       <View style={styles.bannerContainer}>
         <Image
-          source={require('../assets/images/meda.png')}
+          source={require('../../../assets/images/meda.png')}
           style={styles.image}
           resizeMode="cover"
         />
@@ -58,14 +44,14 @@ export default function LandingScreen() {
         <View style={styles.buttonWrapper}>
           <TouchableOpacity
             style={styles.loginButton}
-            onPress={() => router.push("/login")}
+            onPress={() => router.push("/auth/login")}
           >
             <Text style={styles.loginButtonText}>Log In</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.signupButton}
-            onPress={() => router.push("/signup")}
+            onPress={() => router.push("/auth/signup")}
           >
             <Text style={styles.signupButtonText}>Sign Up</Text>
           </TouchableOpacity>
@@ -163,10 +149,8 @@ const styles = StyleSheet.create({
   },
   buttonWrapper: {
     width: "100%",
-    flexDirection: "row",
-    gap: 16,
-    marginTop: 10,
     flexDirection: "column",
+    marginTop: 10,
     alignItems: "center",
   },
   loginButton: {
@@ -193,7 +177,6 @@ const styles = StyleSheet.create({
     height: 60,
     borderColor: "#000",
     borderRadius: 30,
-    borderWidth: 0,
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "#000",
