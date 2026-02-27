@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-, "LoginPages/start.jsx"  ]
+, "LoginPages/start.jsx", "LoginPages/signUp.jsx", "LoginPages/Login.jsx"  ]
 }

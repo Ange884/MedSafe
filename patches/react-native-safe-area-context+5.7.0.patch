@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-safe-area-context/src/NativeSafeAreaProvider.web.tsx b/node_modules/react-native-safe-area-context/src/NativeSafeAreaProvider.web.tsx
+index d3eceed..62e7ba6 100644
+--- a/node_modules/react-native-safe-area-context/src/NativeSafeAreaProvider.web.tsx
++++ b/node_modules/react-native-safe-area-context/src/NativeSafeAreaProvider.web.tsx
+@@ -55,8 +55,14 @@ export function NativeSafeAreaProvider({
+     element.addEventListener(getSupportedTransitionEvent(), onEnd);
+     onEnd();
+     return () => {
+-      document.body.removeChild(element);
+       element.removeEventListener(getSupportedTransitionEvent(), onEnd);
++      // In React 18/19 dev (StrictMode/HMR), cleanup can run after the node was
++      // already removed. `removeChild` would throw; `remove()` is safe.
++      if (typeof (element as any).remove === 'function') {
++        (element as any).remove();
++      } else if (element.parentNode) {
++        element.parentNode.removeChild(element);
++      }
+     };
+   }, [onInsetsChange]);
+ 

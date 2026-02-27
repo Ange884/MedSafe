@@ -1,18 +1,30 @@
 import React from "react";
-import { Text, View, Image, TouchableOpacity, StyleSheet, Dimensions } from "react-native";
-import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import {
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
+import {
+  useFonts,
+  Inter_400Regular,
+  Inter_700Bold,
+} from "@expo-google-fonts/inter";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
-export default function LandingScreen({ navigation }) {
+export default function LandingScreen() {
   let [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_700Bold,
   });
 
   if (!fontsLoaded) {
-    return null; // or a loading spinner
+    return null;
   }
 
   return (
@@ -46,14 +58,14 @@ export default function LandingScreen({ navigation }) {
         <View style={styles.buttonWrapper}>
           <TouchableOpacity
             style={styles.loginButton}
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => router.push("/login")}
           >
             <Text style={styles.loginButtonText}>Log In</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             style={styles.signupButton}
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => router.push("/signup")}
           >
             <Text style={styles.signupButtonText}>Sign Up</Text>
           </TouchableOpacity>
