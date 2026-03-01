@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { View } from "react-native";
 
 export default function Layout() {
   return (
@@ -9,45 +10,24 @@ export default function Layout() {
         tabBarStyle: {
           backgroundColor: "#000",
           borderTopWidth: 0,
-          height: 70,
-          paddingBottom: 10,
+          height: 85,
+          paddingBottom: 25,
           paddingTop: 10,
-          borderTopLeftRadius: 30,
-          borderTopRightRadius: 30,
+          borderTopLeftRadius: 35,
+          borderTopRightRadius: 35,
           position: 'absolute',
+          borderLeftWidth: 0,
+          borderRightWidth: 0,
         },
         tabBarActiveTintColor: "#fff",
-        tabBarInactiveTintColor: "#666",
+        tabBarInactiveTintColor: "#AAA",
+        tabBarShowLabel: false,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           href: null, // Hide index from tab bar as it's the landing redirect
-        }}
-      />
-      <Tabs.Screen
-        name="auth/login"
-        options={{
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="auth/signup"
-        options={{
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="auth/start"
-        options={{
-          href: null,
-        }}
-      />
-      <Tabs.Screen
-        name="auth/profile-setup"
-        options={{
-          href: null,
         }}
       />
       <Tabs.Screen
@@ -65,35 +45,47 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="iot"
-        options={{
-          title: "IoT",
-          tabBarIcon: ({ color }) => <Ionicons name="bluetooth" size={24} color={color} />,
-        }}
-      />
-      <Tabs.Screen
         name="ai"
         options={{
           title: "AI",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="chatbubble-ellipses" size={32} color={color} style={{ marginBottom: 5 }} />
+            <View style={{
+              width: 70,
+              height: 70,
+              backgroundColor: '#fff',
+              borderRadius: 35,
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginBottom: 40,
+              borderWidth: 4,
+              borderColor: '#000',
+              elevation: 5,
+              shadowColor: '#000',
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.3,
+              shadowRadius: 5,
+            }}>
+              <Ionicons name="chatbubble-ellipses" size={32} color="#000" />
+            </View>
           ),
+        }}
+      />
+      <Tabs.Screen
+        name="iot"
+        options={{
+          title: "IoT",
+          tabBarIcon: ({ color }) => <Ionicons name="flash" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
         name="support"
         options={{
           title: "Support",
-          tabBarIcon: ({ color }) => <Ionicons name="settings" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="help-outline" size={24} color={color} />,
         }}
       />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          tabBarIcon: ({ color }) => <Ionicons name="person" size={24} color={color} />,
-        }}
-      />
-    </Tabs>
+      </Tabs>
   );
 }
+
+

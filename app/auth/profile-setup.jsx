@@ -17,7 +17,7 @@ export default function ProfileSetupScreen() {
                 {/* Header Image */}
                 <View style={styles.headerImageContainer}>
                     <Image
-                        source={require("../../../assets/images/meda.png")}
+                        source={require("../../assets/images/meda.png")}
                         style={styles.image}
                     />
                     <View style={styles.overlay} />
@@ -28,28 +28,33 @@ export default function ProfileSetupScreen() {
                 <View style={styles.formContainer}>
                     <Text style={styles.title}>PROFILE SETUP</Text>
                     <Text style={styles.subtitle}>
-                        Before you join us, kindly confirm these details correctly
+                        Hello! Lets get you signed up before you continue 
                     </Text>
 
                     <View style={styles.form}>
+                       <View style={styles.hardCodedContainer}>
+                            <Text style={styles.hardCodedLabel}>NAMES:</Text>
+                            <Text style={styles.hardCodedValue}>UHIRIWE Chrisostom</Text>
+                      </View>
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Role</Text>
-                            <TextInput style={styles.input} placeholder="ex: patient" />
+                            <Text style={styles.label}>Age:</Text>
+                            <TextInput style={styles.input} placeholder="ex: 48 Years old" placeholderTextColor={"#888"}/>
                         </View>
 
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Interests</Text>
-                            <TextInput style={styles.input} placeholder="ex: fitness" />
+                            <Text style={styles.label}>Gender:</Text>
+                            <TextInput style={styles.input} placeholder="ex: fitness" placeholderTextColor={"#888"} />
                         </View>
 
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Interests</Text>
-                            <TextInput style={styles.input} placeholder="ex: nutrition" />
+                            <Text style={styles.label}>Conditions:</Text>
+                            <TextInput style={styles.input} placeholder="ex: nutrition" placeholderTextColor={"#888"} />
                         </View>
 
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Medical record number (PIN Number)</Text>
-                            <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" />
+                            <Text style={styles.label}>Emergency Contact & Phone number:</Text>
+                            <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" placeholderTextColor={"#888"} />
+                             <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" placeholderTextColor={"#888"} />
                         </View>
                     </View>
 
@@ -57,7 +62,7 @@ export default function ProfileSetupScreen() {
                         style={styles.button}
                         onPress={() => router.replace("/home")}
                     >
-                        <Text style={styles.buttonText}>Confirm</Text>
+                        <Text style={styles.buttonText}>Continue</Text>
                     </TouchableOpacity>
                 </View>
             </ScrollView>
@@ -74,7 +79,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
     },
     headerImageContainer: {
-        height: 200,
+        height: 300,
         width: "100%",
         position: "relative",
         justifyContent: "center",
@@ -159,6 +164,19 @@ const styles = StyleSheet.create({
     buttonText: {
         color: "#fff",
         fontSize: 18,
-        fontFamily: "Inter_700Bold",
+        fontFamily: "DMSerifDisplay_400Regular",
     },
+
+hardCodedLabel: {
+  fontSize: 14,
+  fontFamily: "Inter_700Bold",
+  color: "#333",
+  marginBottom: 8,
+},
+
+hardCodedValue: {
+  fontSize: 16,
+  fontFamily: "Inter_400Regular",
+  color: "#111",
+},
 });
