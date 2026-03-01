@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 import {
     Image,
     ScrollView,
@@ -12,53 +13,139 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MedsScreen() {
     const medications = [
-        { id: 1, name: "Acetaminophen", dosage: "500 mg", frequency: "2 pills / day", time: "08:00 AM" },
-        { id: 2, name: "Ibuprofen", dosage: "200 mg", frequency: "1 pill / day", time: "10:00 PM" },
-        { id: 3, name: "Amoxicillin", dosage: "250 mg", frequency: "3 pills / day", time: "01:00 PM" },
+        {
+            id: 1,
+            name: "Paracetamol",
+            duration: "2 weeks",
+            frequency: "3 times / day",
+            times: ["12:00 PM", "20:00 PM"],
+            type: 'bottle'
+        },
+        {
+            id: 2,
+            name: "Paracetamol",
+            duration: "2 weeks",
+            time: "8:00 PM",
+            timeLeft: "6 days",
+            type: 'pills'
+        },
+        {
+            id: 3,
+            name: "Paracetamol",
+            duration: "2 weeks",
+            frequency: "3 times / day",
+            times: ["12:00 PM", "20:00 PM"],
+            type: 'bottle'
+        },
+        {
+            id: 4,
+            name: "Paracetamol",
+            duration: "2 weeks",
+            time: "8:00 PM",
+            timeLeft: "6 days",
+            type: 'pills'
+        },
     ];
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.searchContainer}>
-                    <Ionicons name="search-outline" size={20} color="#666" />
-                    <TextInput style={styles.searchInput} placeholder="Search meds..." />
+                <View style={styles.searchWrapper}>
+                    <TextInput
+                        style={styles.searchInput}
+                        placeholder="Search . . ."
+                        placeholderTextColor="#AAA"
+                    />
+                    <View style={styles.searchIconContainer}>
+                        <Ionicons name="search" size={18} color="#000" />
+                    </View>
                 </View>
-                <TouchableOpacity style={styles.iconButton}>
-                    <Ionicons name="notifications-outline" size={24} color="black" />
+
+                <TouchableOpacity style={styles.notificationButton}>
+                    <Ionicons name="notifications" size={24} color="#000" />
+                    <View style={styles.redDot} />
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.iconButton}>
-                    <Ionicons name="person-circle-outline" size={32} color="black" />
+
+                <TouchableOpacity style={styles.profileButton}>
+                    <Ionicons name="person" size={24} color="#000" />
                 </TouchableOpacity>
             </View>
 
             <Text style={styles.title}>Your Medications</Text>
 
-            <ScrollView contentContainerStyle={styles.scrollContent}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContent}
+            >
                 {medications.map((med) => (
-                    <View key={med.id} style={styles.medCard}>
-                        <View style={styles.medIconContainer}>
-                            <Image
-                                source={require("../../assets/images/meda.png")}
-                                style={styles.medImage}
-                            />
-                        </View>
-                        <View style={styles.medInfo}>
-                            <Text style={styles.medName}>{med.name}</Text>
-                            <Text style={styles.medDosage}>{med.dosage}</Text>
-                            <Text style={styles.medFrequency}>{med.frequency}</Text>
-                            <Text style={styles.medTime}>{med.time}</Text>
-                        </View>
-                        <TouchableOpacity style={styles.checkButton}>
-                            <Ionicons name="checkmark-circle-outline" size={30} color="#000" />
-                        </TouchableOpacity>
+                    <View key={med.id} style={styles.card}>
+                        {med.type === 'bottle' ? (
+                            <View style={styles.cardRow}>
+                                <View style={styles.medDetailsLeft}>
+                                    <Text style={styles.label}>Name:</Text>
+                                    <Text style={styles.value}>{med.name}</Text>
+
+                                    <Text style={[styles.label, { marginTop: 10 }]}>Time for intake:</Text>
+                                    <Text style={styles.value}>{med.duration}</Text>
+
+                                    <View style={styles.row}>
+                                        <View>
+                                            <Text style={[styles.label, { marginTop: 10 }]}>Frequency:</Text>
+                                            <Text style={styles.value}>{med.frequency}</Text>
+                                        </View>
+                                        <View style={{ marginLeft: 30 }}>
+                                            <Text style={[styles.label, { marginTop: 10 }]}>Time(s):</Text>
+                                            {med.times.map((t, i) => (
+                                                <Text key={i} style={styles.value}>{t}</Text>
+                                            ))}
+                                        </View>
+                                    </View>
+                                </View>
+                                <Image
+                                    source={require('../../assets/images/imiti.png')}
+                                    style={styles.cardImageBottle}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                        ) : (
+                            <View style={styles.cardRow}>
+                                <Image
+                                    source={require('../../assets/images/ibinini.png')}
+                                    style={styles.cardImagePills}
+                                    resizeMode="contain"
+                                />
+                                <View style={styles.medDetailsRight}>
+                                    <Text style={[styles.label, { textAlign: 'right' }]}>Name:</Text>
+                                    <Text style={[styles.value, { textAlign: 'right' }]}>{med.name}</Text>
+
+                                    <Text style={[styles.label, { marginTop: 10, textAlign: 'right' }]}>Time for intake:</Text>
+                                    <Text style={[styles.value, { textAlign: 'right' }]}>{med.duration}</Text>
+
+                                    <View style={styles.rowRight}>
+                                        <View style={{ marginRight: 30 }}>
+                                            <Text style={[styles.label, { marginTop: 10, textAlign: 'right' }]}>Time(s):</Text>
+                                            <Text style={[styles.value, { textAlign: 'right' }]}>{med.time}</Text>
+                                        </View>
+                                        <View>
+                                            <Text style={[styles.label, { marginTop: 10, textAlign: 'right' }]}>Time left:</Text>
+                                            <Text style={[styles.value, { textAlign: 'right' }]}>{med.timeLeft}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                        )}
                     </View>
                 ))}
 
-                <TouchableOpacity style={styles.addButton}>
-                    <Ionicons name="add" size={24} color="#fff" />
-                    <Text style={styles.addButtonText}>Add medication</Text>
+                {/* FAB */}
+                <TouchableOpacity style={styles.fab}>
+                    <View style={styles.fabIconContainer}>
+                        <Ionicons name="add" size={24} color="#000" />
+                    </View>
+                    <Text style={styles.fabText}>Add medications</Text>
                 </TouchableOpacity>
+
+                <View style={{ height: 20 }} />
             </ScrollView>
         </SafeAreaView>
     );
@@ -68,108 +155,159 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingHorizontal: 20,
+        marginTop: 40,
     },
     header: {
-        flexDirection: "row",
-        alignItems: "center",
-        marginTop: 10,
-        marginBottom: 20,
-        gap: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingBottom: 20,
+        gap: 15,
     },
-    searchContainer: {
+    searchWrapper: {
         flex: 1,
-        height: 40,
-        backgroundColor: "#f0f0f0",
-        borderRadius: 20,
-        flexDirection: "row",
-        alignItems: "center",
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 25,
+        height: 45,
         paddingHorizontal: 15,
+        borderWidth: 1,
+        borderColor: '#EEE',
+        // Shadow for search
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
     },
     searchInput: {
         flex: 1,
-        marginLeft: 10,
+        fontSize: 14,
         fontFamily: "Inter_400Regular",
+        color: '#000',
     },
-    iconButton: {
-        padding: 5,
+    searchIconContainer: {
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: '#D1D1D1',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    title: {
-        fontSize: 24,
-        fontFamily: "Inter_700Bold",
-        marginBottom: 20,
+    notificationButton: {
+        position: 'relative',
     },
-    scrollContent: {
-        paddingBottom: 100,
-    },
-    medCard: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#fff",
-        borderRadius: 20,
-        padding: 15,
-        marginBottom: 15,
+    redDot: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'red',
         borderWidth: 1,
-        borderColor: "#f0f0f0",
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 5,
-        elevation: 2,
+        borderColor: '#fff',
     },
-    medIconContainer: {
-        width: 60,
-        height: 60,
-        backgroundColor: "#f5f7fa",
-        borderRadius: 15,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    medImage: {
+    profileButton: {
         width: 40,
         height: 40,
-        resizeMode: "contain",
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    medInfo: {
+    title: {
+        fontSize: 28,
+        fontFamily: "DMSerifDisplay_400Regular",
+        paddingHorizontal: 20,
+        marginBottom: 20,
+        color: '#000',
+    },
+    scrollContent: {
+        paddingHorizontal: 20,
+        paddingBottom: 40,
+    },
+    card: {
+        backgroundColor: '#fff',
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 20,
+        borderWidth: 1,
+        borderColor: '#F0F0F0',
+        // Shadow
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 3,
+    },
+    cardRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    medDetailsLeft: {
         flex: 1,
-        marginLeft: 15,
     },
-    medName: {
-        fontSize: 16,
-        fontFamily: "Inter_700Bold",
+    medDetailsRight: {
+        flex: 1,
     },
-    medDosage: {
+    label: {
+        fontSize: 11,
+        color: '#999',
+        fontFamily: "Inter_400Regular",
+    },
+    value: {
         fontSize: 14,
-        color: "#666",
-        fontFamily: "Inter_400Regular",
-    },
-    medFrequency: {
-        fontSize: 12,
-        color: "#999",
-        fontFamily: "Inter_400Regular",
-    },
-    medTime: {
-        fontSize: 12,
-        color: "#2e7d32",
+        color: '#000',
         fontFamily: "Inter_700Bold",
-        marginTop: 2,
     },
-    checkButton: {
-        padding: 5,
+    row: {
+        flexDirection: 'row',
     },
-    addButton: {
-        backgroundColor: "#000",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        height: 50,
-        borderRadius: 25,
-        marginTop: 10,
-        gap: 10,
+    rowRight: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
     },
-    addButtonText: {
-        color: "#fff",
-        fontSize: 16,
-        fontFamily: "Inter_700Bold",
-    }
+    cardImageBottle: {
+        width: 120,
+        height: 120,
+    },
+    cardImagePills: {
+        width: 120,
+        height: 120,
+    },
+    fab: {
+        backgroundColor: '#000',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 30,
+        gap: 12,
+        alignSelf: 'center',
+        marginVertical: 20,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 10,
+        elevation: 5,
+        marginBottom:70,
+    },
+    fabIconContainer: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: '#FFF',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    fabText: {
+        color: '#FFF',
+        fontSize: 14,
+        fontFamily: "DMSerifDisplay_400Regular",
+    },
 });

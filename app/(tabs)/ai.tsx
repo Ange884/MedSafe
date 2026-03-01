@@ -36,7 +36,7 @@ export default function AiScreen() {
                 <View style={styles.welcomeContainer}>
                     <View style={styles.robotContainer}>
                         <Image
-                            source={require("../../assets/images/meda.png")}
+                            source={require("../../assets/images/robot.png")}
                             style={styles.robotImage}
                         />
                         <View style={styles.speechBubble}>
@@ -45,7 +45,9 @@ export default function AiScreen() {
                     </View>
                     <Text style={styles.welcomeTitle}>I am Meda Ai</Text>
                     <Text style={styles.welcomeSubtitle}>
-                        You can ask me questions about your medical health and medications
+                        Hi am Meda
+                        I am more than glad to see you. 
+                        How can I help you today
                     </Text>
 
                     <View style={styles.inputContainer}>

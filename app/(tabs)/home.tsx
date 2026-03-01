@@ -1,19 +1,20 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
-    Image,
+    ImageBackground,
     ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
-    View,
+    View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            <ScrollView showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContent}>
 
                 {/* Header */}
                 <View style={styles.header}>
@@ -29,7 +30,11 @@ export default function HomeScreen() {
                 </View>
 
                 {/* Upcoming Medications Card */}
-                <View style={styles.card}>
+                <ImageBackground
+                    source={require('../../assets/images/rightMeds.png')}
+                    style={styles.card}
+                    imageStyle={styles.cardBackgroundImage}
+                >
                     <View style={styles.cardContent}>
                         <Text style={styles.cardTitle}>Upcoming Medications</Text>
 
@@ -55,11 +60,7 @@ export default function HomeScreen() {
                             </View>
                         </View>
                     </View>
-                    <Image
-                        source={require('../../assets/images/meda.png')}
-                        style={[styles.cardBackgroundImage, { opacity: 0.4 }]}
-                    />
-                </View>
+                </ImageBackground>
 
                 {/* General Status */}
                 <View style={styles.section}>
@@ -95,7 +96,11 @@ export default function HomeScreen() {
                 </View>
 
                 {/* My Medications Card */}
-                <View style={styles.card}>
+                <ImageBackground
+                    source={require('../../assets/images/leftMeds.png')}
+                    style={styles.card}
+                    imageStyle={styles.cardBackgroundImage}
+                >
                     <View style={styles.cardContent}>
                         <Text style={[styles.cardTitle, { textAlign: 'right' }]}>My medications</Text>
                         <View style={styles.medicationAlignRight}>
@@ -112,11 +117,7 @@ export default function HomeScreen() {
                             <View style={styles.viewMoreLine} />
                         </TouchableOpacity>
                     </View>
-                    <Image
-                        source={require('../../assets/images/meda.png')}
-                        style={[styles.cardBackgroundImage, { left: 0, width: '45%', opacity: 0.4 }]}
-                    />
-                </View>
+                </ImageBackground>
 
                 {/* Motivational Footer */}
                 <Text style={styles.footerQuote}>
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         paddingHorizontal: 20,
-        paddingBottom: 100, // Space for custom tab bar
+        paddingBottom: 150, // Space for custom tab bar
     },
     header: {
         flexDirection: "row",
@@ -165,7 +166,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     card: {
-        backgroundColor: "#F2F5F9",
         borderRadius: 24,
         height: 180,
         marginVertical: 15,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     cardBackgroundImage: {
         position: 'absolute',
         right: 0,
-        width: '60%',
+        width: '100%',
         height: '100%',
         resizeMode: 'cover',
         zIndex: 0,
