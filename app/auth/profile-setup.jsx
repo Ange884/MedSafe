@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import {
     Image,
     ScrollView,
@@ -20,6 +21,12 @@ export default function ProfileSetupScreen() {
                         source={require("../../assets/images/meda.png")}
                         style={styles.image}
                     />
+                    <TouchableOpacity
+                        style={styles.backButton}
+                        onPress={() => router.back()}
+                    >
+                        <Ionicons name="arrow-back" size={28} color="#000" />
+                    </TouchableOpacity>
                     <View style={styles.overlay} />
                     <Text style={styles.headerText}>HEALTH</Text>
                 </View>
@@ -32,13 +39,13 @@ export default function ProfileSetupScreen() {
                     </Text>
 
                     <View style={styles.form}>
-                       <View style={styles.hardCodedContainer}>
+                        <View style={styles.hardCodedContainer}>
                             <Text style={styles.hardCodedLabel}>NAMES:</Text>
                             <Text style={styles.hardCodedValue}>UHIRIWE Chrisostom</Text>
-                      </View>
+                        </View>
                         <View style={styles.inputGroup}>
                             <Text style={styles.label}>Age:</Text>
-                            <TextInput style={styles.input} placeholder="ex: 48 Years old" placeholderTextColor={"#888"}/>
+                            <TextInput style={styles.input} placeholder="ex: 48 Years old" placeholderTextColor={"#888"} />
                         </View>
 
                         <View style={styles.inputGroup}>
@@ -54,7 +61,7 @@ export default function ProfileSetupScreen() {
                         <View style={styles.inputGroup}>
                             <Text style={styles.label}>Emergency Contact & Phone number:</Text>
                             <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" placeholderTextColor={"#888"} />
-                             <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" placeholderTextColor={"#888"} />
+                            <TextInput style={styles.input} placeholder="ex: 4578 3578 2748" placeholderTextColor={"#888"} />
                         </View>
                     </View>
 
@@ -167,16 +174,25 @@ const styles = StyleSheet.create({
         fontFamily: "DMSerifDisplay_400Regular",
     },
 
-hardCodedLabel: {
-  fontSize: 14,
-  fontFamily: "Inter_700Bold",
-  color: "#333",
-  marginBottom: 8,
-},
+    hardCodedLabel: {
+        fontSize: 14,
+        fontFamily: "Inter_700Bold",
+        color: "#333",
+        marginBottom: 8,
+    },
 
-hardCodedValue: {
-  fontSize: 16,
-  fontFamily: "Inter_400Regular",
-  color: "#111",
-},
+    hardCodedValue: {
+        fontSize: 16,
+        fontFamily: "Inter_400Regular",
+        color: "#111",
+    },
+    backButton: {
+        position: "absolute",
+        top: 20,
+        left: 20,
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        borderRadius: 20,
+        padding: 8,
+        zIndex: 10,
+    },
 });

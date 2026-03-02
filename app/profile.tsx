@@ -17,6 +17,9 @@ export default function ProfileScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
+                <TouchableOpacity onPress={() => router.back()}>
+                    <Ionicons name="arrow-back" size={28} color="black" />
+                </TouchableOpacity>
                 <Text style={styles.headerTitle}>User Profile</Text>
                 <View style={styles.headerIcons}>
                     <TouchableOpacity
@@ -106,6 +109,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
         marginBottom: 30,
+        gap: 10,
     },
     headerTitle: {
         fontSize: 28,

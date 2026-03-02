@@ -25,15 +25,16 @@ export default function IotScreen() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
+                <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+                    <Ionicons name="arrow-back" size={28} color="#000" />
+                </TouchableOpacity>
                 <View style={styles.searchWrapper}>
+                    <Ionicons name="search" size={18} color="#AAA" />
                     <TextInput
                         style={styles.searchInput}
                         placeholder="Search . . ."
                         placeholderTextColor="#AAA"
                     />
-                    <View style={styles.searchIconContainer}>
-                        <Ionicons name="search" size={18} color="#000" />
-                    </View>
                 </View>
 
                 <TouchableOpacity
@@ -145,7 +146,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingTop: 10,
         paddingBottom: 20,
-        gap: 15,
+        gap: 12,
+    },
+    backButton: {
+        marginRight: 2,
     },
     searchWrapper: {
         flex: 1,
@@ -168,14 +172,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: "Inter_400Regular",
         color: '#000',
-    },
-    searchIconContainer: {
-        width: 32,
-        height: 32,
-        borderRadius: 16,
-        backgroundColor: '#D1D1D1',
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginLeft: 10,
     },
     notificationButton: {
         position: 'relative',

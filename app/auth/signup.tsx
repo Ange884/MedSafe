@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import {
   Image,
   StyleSheet,
@@ -26,6 +27,12 @@ export default function SignUpScreen() {
             source={require("../../assets/images/meda.png")}
             style={styles.image}
           />
+          <TouchableOpacity
+            style={styles.backButton}
+            onPress={() => router.back()}
+          >
+            <Ionicons name="arrow-back" size={28} color="#000" />
+          </TouchableOpacity>
         </View>
 
         {/* 🔹 Content */}
@@ -163,5 +170,13 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 18,
     fontFamily: "DMSerifDisplay_400Regular",
+  },
+  backButton: {
+    position: "absolute",
+    top: 20,
+    left: 20,
+    backgroundColor: "rgba(255, 255, 255, 0.7)",
+    borderRadius: 20,
+    padding: 8,
   },
 });

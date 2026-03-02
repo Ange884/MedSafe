@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
     Image,
@@ -14,6 +15,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AiScreen() {
+    const router = useRouter();
     const [chatStarted, setChatStarted] = useState(false);
     const [message, setMessage] = useState("");
     const [chatHistory, setChatHistory] = useState([
@@ -33,6 +35,12 @@ export default function AiScreen() {
     if (!chatStarted) {
         return (
             <SafeAreaView style={styles.container}>
+                <TouchableOpacity
+                    style={styles.welcomeBackButton}
+                    onPress={() => router.back()}
+                >
+                    <Ionicons name="arrow-back" size={28} color="#000" />
+                </TouchableOpacity>
                 <View style={styles.welcomeContainer}>
                     <View style={styles.robotContainer}>
                         <Image
@@ -46,7 +54,7 @@ export default function AiScreen() {
                     <Text style={styles.welcomeTitle}>I am Meda Ai</Text>
                     <Text style={styles.welcomeSubtitle}>
                         Hi am Meda
-                        I am more than glad to see you. 
+                        I am more than glad to see you.
                         How can I help you today
                     </Text>
 
@@ -73,7 +81,7 @@ export default function AiScreen() {
             >
                 <View style={styles.chatHeader}>
                     <TouchableOpacity onPress={() => setChatStarted(false)}>
-                        <Ionicons name="chevron-back" size={24} color="#000" />
+                        <Ionicons name="arrow-back" size={28} color="#000" />
                     </TouchableOpacity>
                     <Text style={styles.chatTitle}>Meda AI</Text>
                     <View style={{ width: 24 }} />
@@ -113,6 +121,12 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         paddingHorizontal: 40,
+    },
+    welcomeBackButton: {
+        position: 'absolute',
+        top: 60,
+        left: 20,
+        zIndex: 10,
     },
     robotContainer: {
         width: 250,
