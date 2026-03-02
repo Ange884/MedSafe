@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import {
     ScrollView,
@@ -10,6 +11,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfileScreen() {
+    const router = useRouter();
     const [careGiverAccess, setCareGiverAccess] = useState(false);
 
     return (
@@ -17,7 +19,10 @@ export default function ProfileScreen() {
             <View style={styles.header}>
                 <Text style={styles.headerTitle}>User Profile</Text>
                 <View style={styles.headerIcons}>
-                    <TouchableOpacity style={styles.iconButton}>
+                    <TouchableOpacity
+                        style={styles.iconButton}
+                        onPress={() => router.push('/notifications')}
+                    >
                         <Ionicons name="notifications" size={24} color="black" />
                         <View style={styles.notificationDot} />
                     </TouchableOpacity>

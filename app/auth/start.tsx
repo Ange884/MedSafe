@@ -75,10 +75,10 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     },
-    overlay: {
-        ...StyleSheet.absoluteFillObject,
-        backgroundColor: "#0000007D", // Slight blue semi-transparent overlay
-    },
+    // overlay: {
+    //     ...StyleSheet.absoluteFillObject,
+    //     backgroundColor: "#0000007D", // Slight blue semi-transparent overlay
+    // },
     brandContainer: {
         position: "absolute",
         top: "40%",

@@ -41,7 +41,10 @@ export default function SupportScreen() {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.notificationButton}>
+                <TouchableOpacity
+                    style={styles.notificationButton}
+                    onPress={() => router.push('/notifications')}
+                >
                     <Ionicons name="notifications" size={24} color="#000" />
                     <View style={styles.redDot} />
                 </TouchableOpacity>
@@ -168,7 +171,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        marginTop: 40,
     },
     header: {
         flexDirection: 'row',

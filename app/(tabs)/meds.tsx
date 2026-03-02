@@ -63,7 +63,10 @@ export default function MedsScreen() {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.notificationButton}>
+                <TouchableOpacity
+                    style={styles.notificationButton}
+                    onPress={() => router.push('/notifications')}
+                >
                     <Ionicons name="notifications" size={24} color="#000" />
                     <View style={styles.redDot} />
                 </TouchableOpacity>
@@ -264,7 +267,7 @@ const styles = StyleSheet.create({
     value: {
         fontSize: 14,
         color: '#000',
-        fontFamily: "Inter_700Bold",
+        fontFamily: "Inter_400Regular",
     },
     row: {
         flexDirection: 'row',

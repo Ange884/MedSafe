@@ -20,7 +20,7 @@ export default function HomeScreen() {
 
                 {/* Header */}
                 <View style={styles.header}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push('/notifications')}>
                         <Ionicons name="notifications" size={28} color="#000" />
                         <View style={styles.notificationBadge} />
                     </TouchableOpacity>
@@ -206,7 +206,7 @@ const styles = StyleSheet.create({
     },
     medName: {
         fontSize: 16,
-        fontFamily: "Inter_700Bold",
+        fontFamily: "Inter_400Regular",
         color: '#000',
     },
     medStatusRow: {
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     statusTextGreen: {
         fontSize: 10,
         color: '#4CAF50',
-        fontWeight: 'bold',
+        fontFamily: "Inter_400Regular",
     },
     statusBadgeRed: {
         flexDirection: 'row',
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     statusTextRed: {
         fontSize: 10,
         color: '#FF3B30',
-        fontWeight: 'bold',
+        fontFamily: "Inter_400Regular",
     },
     section: {
         marginVertical: 20,
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     },
     statusValue: {
         fontSize: 16,
-        fontFamily: "Inter_700Bold",
+        fontFamily: "Inter_400Regular",
         color: '#000',
     },
     iotStatusRow: {

@@ -36,7 +36,10 @@ export default function IotScreen() {
                     </View>
                 </View>
 
-                <TouchableOpacity style={styles.notificationButton}>
+                <TouchableOpacity
+                    style={styles.notificationButton}
+                    onPress={() => router.push('/notifications')}
+                >
                     <Ionicons name="notifications" size={24} color="#000" />
                     <View style={styles.redDot} />
                 </TouchableOpacity>
@@ -212,7 +215,7 @@ const styles = StyleSheet.create({
     },
     sectionTitle: {
         fontSize: 18,
-        fontFamily: "Inter_700Bold",
+        fontFamily: "Inter_400Regular",
         color: '#333',
         marginBottom: 10,
     },
