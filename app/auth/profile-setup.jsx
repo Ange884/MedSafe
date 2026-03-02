@@ -28,7 +28,7 @@ export default function ProfileSetupScreen() {
                 <View style={styles.formContainer}>
                     <Text style={styles.title}>PROFILE SETUP</Text>
                     <Text style={styles.subtitle}>
-                        Hello! Lets get you signed up before you continue 
+                        Hello! Lets get you signed up before you continue
                     </Text>
 
                     <View style={styles.form}>

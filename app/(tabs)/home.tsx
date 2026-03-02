@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
     ImageBackground,
     ScrollView,
@@ -13,6 +13,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
     const router = useRouter();
+    const [checkedPills, setCheckedPills] = useState<number[]>([1, 2]);
+
+    const togglePill = (pillNumber: number) => {
+        if (checkedPills.includes(pillNumber)) {
+            setCheckedPills(checkedPills.filter(id => id !== pillNumber));
+        } else {
+            setCheckedPills([...checkedPills, pillNumber]);
+        }
+    };
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -74,21 +83,23 @@ export default function HomeScreen() {
                     <Text style={styles.sectionTitle}>General Status</Text>
                     <Text style={styles.label}>Medication Taken Today:</Text>
                     <View style={styles.pillRow}>
-                        <View style={styles.checkedPill}>
-                            <Ionicons name="checkmark-circle" size={20} color="#000" />
-                            <Text style={styles.pillNumber}>1</Text>
-                        </View>
-                        <View style={styles.checkedPill}>
-                            <Ionicons name="checkmark-circle" size={20} color="#000" />
-                            <Text style={styles.pillNumber}>2</Text>
-                        </View>
-                        <View style={styles.uncheckedPill}>
-                            <View style={styles.pillOutline} />
-                            <Text style={styles.pillNumber}>3</Text>
-                        </View>
+                        {[1, 2, 3].map((num) => (
+                            <TouchableOpacity
+                                key={num}
+                                style={checkedPills.includes(num) ? styles.checkedPill : styles.uncheckedPill}
+                                onPress={() => togglePill(num)}
+                            >
+                                {checkedPills.includes(num) ? (
+                                    <Ionicons name="checkmark-circle" size={20} color="#000" />
+                                ) : (
+                                    <View style={styles.pillOutline} />
+                                )}
+                                <Text style={styles.pillNumber}>{num}</Text>
+                            </TouchableOpacity>
+                        ))}
                     </View>
                     <Text style={styles.label}>Missed medication:</Text>
-                    <Text style={styles.statusValue}>None</Text>
+                    <Text style={styles.statusValue}>{checkedPills.length < 3 ? 'Some' : 'None'}</Text>
                 </View>
 
                 {/* IoT Device Status */}
