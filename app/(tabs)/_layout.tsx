@@ -81,7 +81,7 @@ export default function Layout() {
         name="support"
         options={{
           title: "Support",
-          tabBarIcon: ({ color }) => <Ionicons name="help-outline" size={24} color={color} />,
+          tabBarIcon: ({ color }) => <Ionicons name="help-circle-outline" size={24} color={color} />,
         }}
       />
       </Tabs>

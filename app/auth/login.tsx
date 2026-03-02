@@ -58,7 +58,7 @@ export default function LoginScreen() {
                 {/* Login Button */}
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => router.replace("/profile")}
+                    onPress={() => router.replace("/home")}
                 >
                     <Text style={styles.buttonText}>Log In</Text>
                 </TouchableOpacity>
