@@ -1,110 +1,132 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useState } from "react";
+import { useRouter } from "expo-router";
+import React from "react";
 import {
     ScrollView,
     StyleSheet,
-    Switch,
     Text,
+    TextInput,
     TouchableOpacity,
     View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SupportScreen() {
-    const [reminderMode, setReminderMode] = useState(true);
-    const [soundEnabled, setSoundEnabled] = useState(true);
-    const [vibrationEnabled, setVibrationEnabled] = useState(false);
-    const [flashlightEnabled, setFlashlightEnabled] = useState(false);
+    const router = useRouter();
+    const missedDoseAlerts = [
+        { id: 1, date: "02 May 2026", time: "11 AM" },
+        { id: 2, date: "11 February 2026", time: "8 AM" },
+        { id: 3, date: "11 June 2026", time: "12 PM" },
+        { id: 4, date: "11 June 2026", time: "12 PM" },
+    ];
 
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <Text style={styles.headerTitle}>Settings</Text>
-                <TouchableOpacity style={styles.iconButton}>
-                    <Ionicons name="person-circle-outline" size={32} color="black" />
+                <View style={styles.searchWrapper}>
+                    <TextInput
+                        style={styles.searchInput}
+                        placeholder="Search . . ."
+                        placeholderTextColor="#AAA"
+                    />
+                    <View style={styles.searchIconContainer}>
+                        <Ionicons name="search" size={18} color="#000" />
+                    </View>
+                </View>
+
+                <TouchableOpacity style={styles.notificationButton}>
+                    <Ionicons name="notifications" size={24} color="#000" />
+                    <View style={styles.redDot} />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/profile')}>
+                    <Ionicons name="person" size={24} color="#000" />
                 </TouchableOpacity>
             </View>
 
-            <ScrollView contentContainerStyle={styles.scrollContent}>
+            <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.scrollContent}
+            >
+                <Text style={styles.title}>Settings</Text>
+
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Reminder mode</Text>
-                    <View style={styles.row}>
-                        <Text style={styles.label}>Enable Reminders</Text>
-                        <Switch
-                            value={reminderMode}
-                            onValueChange={setReminderMode}
-                            trackColor={{ false: "#767577", true: "#000" }}
-                            thumbColor={reminderMode ? "#fff" : "#f4f3f4"}
-                        />
+                    <View style={styles.optionsList}>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="radio-button-on" size={24} color="#000" />
+                            <Text style={styles.optionText}>Sound</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>Vibration</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>Silent</Text>
+                        </View>
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Reminder Strength</Text>
-                    <View style={styles.optionList}>
-                        <TouchableOpacity
-                            style={styles.optionRow}
-                            onPress={() => setSoundEnabled(!soundEnabled)}
-                        >
-                            <Ionicons
-                                name={soundEnabled ? "checkbox" : "square-outline"}
-                                size={24}
-                                color={soundEnabled ? "#000" : "#ccc"}
-                            />
-                            <Text style={styles.optionLabel}>Sound</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={styles.optionRow}
-                            onPress={() => setVibrationEnabled(!vibrationEnabled)}
-                        >
-                            <Ionicons
-                                name={vibrationEnabled ? "checkbox" : "square-outline"}
-                                size={24}
-                                color={vibrationEnabled ? "#000" : "#ccc"}
-                            />
-                            <Text style={styles.optionLabel}>Vibration</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                            style={styles.optionRow}
-                            onPress={() => setFlashlightEnabled(!flashlightEnabled)}
-                        >
-                            <Ionicons
-                                name={flashlightEnabled ? "checkbox" : "square-outline"}
-                                size={24}
-                                color={flashlightEnabled ? "#000" : "#ccc"}
-                            />
-                            <Text style={styles.optionLabel}>Flashlight (External IoT)</Text>
-                        </TouchableOpacity>
+                    <View style={styles.optionsList}>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="radio-button-on" size={24} color="#000" />
+                            <Text style={styles.optionText}>Gentle</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>Normal</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>Persistent (keeps reminding until taken)</Text>
+                        </View>
                     </View>
                 </View>
 
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Emergency options</Text>
-                    <View style={styles.optionList}>
-                        <TouchableOpacity style={styles.emergencyButton}>
-                            <Ionicons name="call" size={20} color="#fff" />
-                            <Text style={styles.emergencyButtonText}>Call Emergency Contact</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.emergencyButtonRed}>
-                            <Ionicons name="warning" size={20} color="#fff" />
-                            <Text style={styles.emergencyButtonText}>Broadcast Emergency Signal</Text>
-                        </TouchableOpacity>
+                    <Text style={styles.sectionTitle}>Snooze options</Text>
+                    <View style={styles.snoozeRow}>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="radio-button-on" size={24} color="#000" />
+                            <Text style={styles.optionText}>5 min</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>10 min</Text>
+                        </View>
+                        <View style={styles.optionItem}>
+                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                            <Text style={styles.optionText}>30 min</Text>
+                        </View>
                     </View>
                 </View>
 
                 <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Network (External IoT)</Text>
-                    <View style={styles.alertCard}>
-                        <Ionicons name="alert-circle" size={20} color="#d32f2f" />
-                        <Text style={styles.alertText}>No IoT device segment found</Text>
-                    </View>
-                    <View style={styles.alertCard}>
-                        <Ionicons name="alert-circle" size={20} color="#d32f2f" />
-                        <Text style={styles.alertText}>Bluetooth Connection Lost</Text>
+                    <Text style={styles.sectionTitle}>Smart reminders</Text>
+                    <Text style={styles.subLabel}>Didn't open device</Text>
+                    <View style={styles.optionItem}>
+                        <Ionicons name="radio-button-on" size={24} color="#000" />
+                        <Text style={styles.optionText}>Remind me again</Text>
                     </View>
                 </View>
+
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Missed dose alerts</Text>
+                    {missedDoseAlerts.map((alert, index) => (
+                        <View key={index} style={styles.alertCard}>
+                            <Ionicons name="alert-circle" size={48} color="#FF3B30" />
+                            <View style={styles.alertDetails}>
+                                <Text style={styles.alertDate}>{alert.date}</Text>
+                                <Text style={styles.alertMessage}>You missed your {alert.time} dose</Text>
+                            </View>
+                        </View>
+                    ))}
+                </View>
+
+                <View style={{ height: 100 }} />
             </ScrollView>
         </SafeAreaView>
     );
@@ -114,24 +136,77 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: "#fff",
-        paddingHorizontal: 20,
+        marginTop: 40,
     },
     header: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginTop: 10,
-        marginBottom: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingBottom: 20,
+        gap: 15,
     },
-    headerTitle: {
-        fontSize: 24,
-        fontFamily: "Inter_700Bold",
+    searchWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 25,
+        height: 45,
+        paddingHorizontal: 15,
+        borderWidth: 1,
+        borderColor: '#EEE',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
     },
-    iconButton: {
-        padding: 5,
+    searchInput: {
+        flex: 1,
+        fontSize: 14,
+        fontFamily: "Inter_400Regular",
+        color: '#000',
+    },
+    searchIconContainer: {
+        width: 32,
+        height: 32,
+        borderRadius: 16,
+        backgroundColor: '#D1D1D1',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    notificationButton: {
+        position: 'relative',
+    },
+    redDot: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'red',
+        borderWidth: 1,
+        borderColor: '#fff',
+    },
+    profileButton: {
+        width: 40,
+        height: 40,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     scrollContent: {
-        paddingBottom: 100,
+        paddingHorizontal: 20,
+    },
+    title: {
+        fontSize: 28,
+        fontFamily: "DMSerifDisplay_400Regular",
+        marginBottom: 30,
+        color: '#000',
     },
     section: {
         marginBottom: 30,
@@ -139,71 +214,62 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 18,
         fontFamily: "Inter_700Bold",
+        color: '#333',
         marginBottom: 15,
-        color: "#000",
     },
-    row: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        backgroundColor: "#f9f9f9",
-        padding: 15,
-        borderRadius: 15,
-    },
-    label: {
-        fontSize: 14,
-        fontFamily: "Inter_400Regular",
-        color: "#444",
-    },
-    optionList: {
+    optionsList: {
         gap: 12,
     },
-    optionRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        gap: 12,
-        paddingVertical: 5,
+    optionItem: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     },
-    optionLabel: {
+    optionText: {
         fontSize: 14,
+        color: '#666',
         fontFamily: "Inter_400Regular",
-        color: "#444",
     },
-    emergencyButton: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#000",
-        height: 50,
-        borderRadius: 15,
-        paddingHorizontal: 20,
-        gap: 15,
+    snoozeRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
-    emergencyButtonRed: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#d32f2f",
-        height: 50,
-        borderRadius: 15,
-        paddingHorizontal: 20,
-        gap: 15,
-    },
-    emergencyButtonText: {
-        color: "#fff",
-        fontSize: 14,
-        fontFamily: "Inter_700Bold",
+    subLabel: {
+        fontSize: 12,
+        color: '#888',
+        fontFamily: "Inter_400Regular",
+        marginBottom: 5,
     },
     alertCard: {
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: "#ffebee",
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#FFE5E5',
+        borderRadius: 15,
         padding: 15,
-        borderRadius: 12,
-        gap: 10,
-        marginBottom: 10,
+        marginBottom: 15,
+        gap: 15,
+        borderWidth: 1,
+        borderColor: '#FFD1D1',
+        // Shadow
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
+        elevation: 3,
     },
-    alertText: {
-        fontSize: 13,
-        color: "#c62828",
+    alertDetails: {
+        flex: 1,
+    },
+    alertDate: {
+        fontSize: 10,
+        color: '#FF3B30',
         fontFamily: "Inter_400Regular",
-    }
+        marginBottom: 2,
+    },
+    alertMessage: {
+        fontSize: 14,
+        color: '#FF3B30',
+        fontFamily: "Inter_700Bold",
+    },
 });

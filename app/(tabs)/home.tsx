@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
     ImageBackground,
@@ -11,6 +12,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
+    const router = useRouter();
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false}
@@ -22,7 +24,7 @@ export default function HomeScreen() {
                         <Ionicons name="notifications" size={28} color="#000" />
                         <View style={styles.notificationBadge} />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => router.push('/profile')}>
                         <View style={styles.profileIconContainer}>
                             <Ionicons name="person" size={24} color="#000" />
                         </View>

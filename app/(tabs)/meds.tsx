@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React from "react";
 import {
     Image,
@@ -12,6 +13,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MedsScreen() {
+    const router = useRouter();
     const medications = [
         {
             id: 1,
@@ -66,7 +68,7 @@ export default function MedsScreen() {
                     <View style={styles.redDot} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.profileButton}>
+                <TouchableOpacity style={styles.profileButton} onPress={() => router.push('/profile')}>
                     <Ionicons name="person" size={24} color="#000" />
                 </TouchableOpacity>
             </View>
@@ -295,7 +297,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.3,
         shadowRadius: 10,
         elevation: 5,
-        marginBottom:70,
+        marginBottom: 70,
     },
     fabIconContainer: {
         width: 36,
