@@ -20,15 +20,20 @@ export default function HomeScreen() {
 
                 {/* Header */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => router.push('/notifications')}>
-                        <Ionicons name="notifications" size={28} color="#000" />
-                        <View style={styles.notificationBadge} />
+                    <TouchableOpacity onPress={() => router.back()}>
+                        <Ionicons name="arrow-back" size={28} color="#000" />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => router.push('/profile')}>
-                        <View style={styles.profileIconContainer}>
-                            <Ionicons name="person" size={24} color="#000" />
-                        </View>
-                    </TouchableOpacity>
+                    <View style={styles.headerRight}>
+                        <TouchableOpacity onPress={() => router.push('/notifications')}>
+                            <Ionicons name="notifications" size={28} color="#000" />
+                            <View style={styles.notificationBadge} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => router.push('/profile')}>
+                            <View style={styles.profileIconContainer}>
+                                <Ionicons name="person" size={24} color="#000" />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
 
                 {/* Upcoming Medications Card */}
@@ -142,9 +147,13 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: "row",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
         alignItems: "center",
         paddingVertical: 15,
+    },
+    headerRight: {
+        flexDirection: "row",
+        alignItems: "center",
         gap: 15,
     },
     notificationBadge: {
@@ -174,13 +183,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         position: 'relative',
         justifyContent: 'center',
-
-        // Shadow
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 3,
     },
     cardBackgroundImage: {
         position: 'absolute',

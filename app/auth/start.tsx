@@ -6,6 +6,7 @@ import {
     Text,
     TouchableOpacity,
     View,
+    ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,48 +16,50 @@ const { width } = Dimensions.get("window");
 export default function LandingScreen() {
     return (
         <SafeAreaView style={styles.container}>
-            {/* Top Banner Section */}
-            <View style={styles.bannerContainer}>
-                <Image
-                    source={require('../../assets/images/meda.png')}
-                    style={styles.image}
-                    resizeMode="cover"
-                />
-                <View style={styles.overlay} />
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                {/* Top Banner Section */}
+                <View style={styles.bannerContainer}>
+                    <Image
+                        source={require('../../assets/images/meda.png')}
+                        style={styles.image}
+                        resizeMode="cover"
+                    />
+                    {/* <View style={styles.overlay} /> */}
 
-                {/* Logo and Brand Text over Image */}
-                <View style={styles.brandContainer}>
-                    <Text style={styles.logoText}>MEDA</Text>
-                    <Text style={styles.tagline}>Health with no limits</Text>
+                    {/* Logo and Brand Text over Image */}
+                    <View style={styles.brandContainer}>
+                        <Text style={styles.logoText}>MEDA</Text>
+                        <Text style={styles.tagline}>Health with no limits</Text>
+                    </View>
+
+                    {/* Wavy Divider (SVG-like effect using overlapping views or specialized styling) */}
                 </View>
 
-                {/* Wavy Divider (SVG-like effect using overlapping views or specialized styling) */}
-            </View>
+                {/* Content Section */}
+                <View style={styles.contentContainer}>
+                    <Text style={styles.welcomeText}>WELCOME</Text>
+                    <Text style={styles.description}>
+                        An amazing experience where you no longer need to spend hours looking for your medical papers as you now go with them in your phone
+                    </Text>
 
-            {/* Content Section */}
-            <View style={styles.contentContainer}>
-                <Text style={styles.welcomeText}>WELCOME</Text>
-                <Text style={styles.description}>
-                    An amazing experience where you no longer need to spend hours looking for your medical papers as you now go with them in your phone
-                </Text>
+                    {/* Buttons Section */}
+                    <View style={styles.buttonWrapper}>
+                        <TouchableOpacity
+                            style={styles.loginButton}
+                            onPress={() => router.push("/auth/login")}
+                        >
+                            <Text style={styles.loginButtonText}>Log In</Text>
+                        </TouchableOpacity>
 
-                {/* Buttons Section */}
-                <View style={styles.buttonWrapper}>
-                    <TouchableOpacity
-                        style={styles.loginButton}
-                        onPress={() => router.push("/auth/login")}
-                    >
-                        <Text style={styles.loginButtonText}>Log In</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        style={styles.signupButton}
-                        onPress={() => router.push("/auth/signup")}
-                    >
-                        <Text style={styles.signupButtonText}>Sign Up</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.signupButton}
+                            onPress={() => router.push("/auth/signup")}
+                        >
+                            <Text style={styles.signupButtonText}>Sign Up</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -67,7 +70,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
     },
     bannerContainer: {
-        height: "55%",
+        height: "65%",
         width: "100%",
         position: "relative",
     },
@@ -127,7 +130,6 @@ const styles = StyleSheet.create({
         transform: [{ scaleX: 2 }],
     },
     contentContainer: {
-        flex: 1,
         alignItems: "center",
         paddingHorizontal: 40,
         paddingTop: 32,
@@ -171,8 +173,8 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 18,
         fontWeight: "bold",
-       fontFamily: "DMSerifDisplay_400Regular",
-        
+        fontFamily: "DMSerifDisplay_400Regular",
+
     },
     signupButton: {
         width: "70%",
@@ -187,6 +189,7 @@ const styles = StyleSheet.create({
         shadowRadius: 3,
         elevation: 3,
         borderWidth: 1,
+        marginBottom: 40,
     },
     signupButtonText: {
         color: "#000",

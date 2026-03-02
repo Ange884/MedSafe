@@ -6,63 +6,66 @@ import {
     TextInput,
     TouchableOpacity,
     View,
+    ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function LoginScreen() {
     return (
         <SafeAreaView style={styles.container}>
-            {/* Image Section */}
-            <View style={styles.imageContainer}>
-                <Image
-                    source={require("../../assets/images/meda.png")}
-                    style={styles.image}
-                />
-            </View>
-
-            {/* Content Section */}
-            <View style={styles.content}>
-                <Text style={styles.title}>WELCOME</Text>
-                <Text style={styles.subtitle}>
-                    It's nice to see you again. Log in to continue.
-                </Text>
-
-                {/* Inputs */}
-                <View style={styles.form}>
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Username"
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                {/* Image Section */}
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require("../../assets/images/meda.png")}
+                        style={styles.image}
                     />
-
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Phone number or Email"
-                        keyboardType="email-address"
-                    />
-
-                    <TextInput
-                        style={styles.input}
-                        placeholder="Password"
-                        secureTextEntry
-                    />
-
-                    <Text
-                        style={styles.footerText}
-                        onPress={() => router.push("/auth/signup")}
-                    >
-                        Don’t have an account?{" "}
-                        <Text style={styles.link}>Sign Up</Text>
-                    </Text>
                 </View>
 
-                {/* Login Button */}
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => router.replace("/home")}
-                >
-                    <Text style={styles.buttonText}>Log In</Text>
-                </TouchableOpacity>
-            </View>
+                {/* Content Section */}
+                <View style={styles.content}>
+                    <Text style={styles.title}>WELCOME</Text>
+                    <Text style={styles.subtitle}>
+                        It's nice to see you again. Log in to continue.
+                    </Text>
+
+                    {/* Inputs */}
+                    <View style={styles.form}>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Username"
+                        />
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Phone number or Email"
+                            keyboardType="email-address"
+                        />
+
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Password"
+                            secureTextEntry
+                        />
+
+                        <Text
+                            style={styles.footerText}
+                            onPress={() => router.push("/auth/signup")}
+                        >
+                            Don’t have an account?{" "}
+                            <Text style={styles.link}>Sign Up</Text>
+                        </Text>
+                    </View>
+
+                    {/* Login Button */}
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => router.replace("/home")}
+                    >
+                        <Text style={styles.buttonText}>Log In</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     );
 }
@@ -74,7 +77,7 @@ const styles = StyleSheet.create({
     },
 
     imageContainer: {
-        height: "45%",
+        height: "50%",
     },
 
     image: {
@@ -84,7 +87,6 @@ const styles = StyleSheet.create({
     },
 
     content: {
-        flex: 1,
         paddingHorizontal: 28,
         paddingTop: 20,
     },
@@ -162,6 +164,7 @@ const styles = StyleSheet.create({
         shadowRadius: 6,
         shadowOffset: { width: 0, height: 3 },
         elevation: 4,
+        marginBottom: 30,
     },
 
     buttonText: {
