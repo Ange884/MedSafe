@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
     ScrollView,
     StyleSheet,
@@ -13,6 +13,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SupportScreen() {
     const router = useRouter();
+
+    // State for interactive checkboxes and radio buttons
+    const [reminderMode, setReminderMode] = useState("Sound");
+    const [reminderStrength, setReminderStrength] = useState("Gentle");
+    const [snoozeOption, setSnoozeOption] = useState("5 min");
+    const [smartReminders, setSmartReminders] = useState(true);
+
     const missedDoseAlerts = [
         { id: 1, date: "02 May 2026", time: "11 AM" },
         { id: 2, date: "11 February 2026", time: "8 AM" },
@@ -53,64 +60,89 @@ export default function SupportScreen() {
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Reminder mode</Text>
                     <View style={styles.optionsList}>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="radio-button-on" size={24} color="#000" />
-                            <Text style={styles.optionText}>Sound</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>Vibration</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>Silent</Text>
-                        </View>
+                        {["Sound", "Vibration", "Silent"].map((mode) => (
+                            <TouchableOpacity
+                                key={mode}
+                                style={styles.optionItem}
+                                onPress={() => setReminderMode(mode)}
+                            >
+                                <Ionicons
+                                    name={reminderMode === mode ? "radio-button-on" : "radio-button-off"}
+                                    size={24}
+                                    color={reminderMode === mode ? "#000" : "#CCC"}
+                                />
+                                <Text style={[styles.optionText, reminderMode === mode && styles.selectedOptionText]}>
+                                    {mode}
+                                </Text>
+                            </TouchableOpacity>
+                        ))}
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Reminder Strength</Text>
                     <View style={styles.optionsList}>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="radio-button-on" size={24} color="#000" />
-                            <Text style={styles.optionText}>Gentle</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>Normal</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>Persistent (keeps reminding until taken)</Text>
-                        </View>
+                        {[
+                            { label: "Gentle", value: "Gentle" },
+                            { label: "Normal", value: "Normal" },
+                            { label: "Persistent (keeps reminding until taken)", value: "Persistent" }
+                        ].map((strength) => (
+                            <TouchableOpacity
+                                key={strength.value}
+                                style={styles.optionItem}
+                                onPress={() => setReminderStrength(strength.value)}
+                            >
+                                <Ionicons
+                                    name={reminderStrength === strength.value ? "radio-button-on" : "radio-button-off"}
+                                    size={24}
+                                    color={reminderStrength === strength.value ? "#000" : "#CCC"}
+                                />
+                                <Text style={[styles.optionText, reminderStrength === strength.value && styles.selectedOptionText]}>
+                                    {strength.label}
+                                </Text>
+                            </TouchableOpacity>
+                        ))}
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Snooze options</Text>
                     <View style={styles.snoozeRow}>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="radio-button-on" size={24} color="#000" />
-                            <Text style={styles.optionText}>5 min</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>10 min</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
-                            <Text style={styles.optionText}>30 min</Text>
-                        </View>
+                        {["5 min", "10 min", "30 min"].map((option) => (
+                            <TouchableOpacity
+                                key={option}
+                                style={styles.optionItem}
+                                onPress={() => setSnoozeOption(option)}
+                            >
+                                <Ionicons
+                                    name={snoozeOption === option ? "radio-button-on" : "radio-button-off"}
+                                    size={24}
+                                    color={snoozeOption === option ? "#000" : "#CCC"}
+                                />
+                                <Text style={[styles.optionText, snoozeOption === option && styles.selectedOptionText]}>
+                                    {option}
+                                </Text>
+                            </TouchableOpacity>
+                        ))}
                     </View>
                 </View>
 
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Smart reminders</Text>
                     <Text style={styles.subLabel}>Didn't open device</Text>
-                    <View style={styles.optionItem}>
-                        <Ionicons name="radio-button-on" size={24} color="#000" />
-                        <Text style={styles.optionText}>Remind me again</Text>
-                    </View>
+                    <TouchableOpacity
+                        style={styles.optionItem}
+                        onPress={() => setSmartReminders(!smartReminders)}
+                    >
+                        <Ionicons
+                            name={smartReminders ? "checkbox" : "square-outline"}
+                            size={24}
+                            color={smartReminders ? "#000" : "#CCC"}
+                        />
+                        <Text style={[styles.optionText, smartReminders && styles.selectedOptionText]}>
+                            Remind me again
+                        </Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.section}>
@@ -229,6 +261,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#666',
         fontFamily: "Inter_400Regular",
+    },
+    selectedOptionText: {
+        color: '#000',
+        fontFamily: "Inter_700Bold",
     },
     snoozeRow: {
         flexDirection: 'row',

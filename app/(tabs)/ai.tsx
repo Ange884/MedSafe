@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
         gap: 10,
         borderTopWidth: 1,
         borderTopColor: "#f0f0f0",
-        marginBottom: 70, // Tab bar space
+        marginBottom: 120, // Tab bar space
     },
     footerTextInput: {
         flex: 1,
@@ -245,6 +245,8 @@ const styles = StyleSheet.create({
         borderRadius: 22,
         paddingHorizontal: 20,
         fontFamily: "Inter_400Regular",
+        borderWidth: 1,
+        borderColor: "#ccc",
     },
     footerSendButton: {
         width: 45,
