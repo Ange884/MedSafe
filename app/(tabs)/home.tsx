@@ -78,6 +78,30 @@ export default function HomeScreen() {
                     </View>
                 </ImageBackground>
 
+                {/* Daily Health Guide */}
+                <View style={styles.healthGuideCard}>
+                    <Text style={styles.healthGuideTitle}>Daily Health Guide</Text>
+                    <View style={styles.healthGuideRow}>
+                        <View style={styles.healthGuideItem}>
+                            <View style={[styles.healthGuideIconContainer, { backgroundColor: '#E8F5E9' }]}>
+                                <Ionicons name="leaf" size={20} color="#4CAF50" />
+                            </View>
+                            <View>
+                                <Text style={styles.healthItemTitle}>Nutrition</Text>
+                                <Text style={styles.healthItemDesc}>Low salt, high fiber</Text>
+                            </View>
+                        </View>
+                        <View style={styles.healthGuideItem}>
+                            <View style={[styles.healthGuideIconContainer, { backgroundColor: '#E3F2FD' }]}>
+                                <Ionicons name="fitness" size={20} color="#2196F3" />
+                            </View>
+                            <View>
+                                <Text style={styles.healthItemTitle}>Exercise</Text>
+                                <Text style={styles.healthItemDesc}>15 min light walk</Text>
+                            </View>
+                        </View>
+                    </View>
+                </View>
                 {/* General Status */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>General Status</Text>
@@ -363,5 +387,53 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
         marginTop: 30,
         fontFamily: "Inter_400Regular",
+    },
+    healthGuideCard: {
+        backgroundColor: '#F9F9F9',
+        borderRadius: 20,
+        padding: 15,
+        marginVertical: 10,
+        borderWidth: 1,
+        borderColor: '#F0F0F0',
+    },
+    healthGuideTitle: {
+        fontSize: 18,
+        fontFamily: "DMSerifDisplay_400Regular",
+        marginBottom: 15,
+        color: '#000',
+    },
+    healthGuideRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: 10,
+    },
+    healthGuideItem: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        backgroundColor: '#fff',
+        padding: 10,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: '#F0F0F0',
+    },
+    healthGuideIconContainer: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    healthItemTitle: {
+        fontSize: 12,
+        fontFamily: "Inter_700Bold",
+        color: '#000',
+    },
+    healthItemDesc: {
+        fontSize: 10,
+        fontFamily: "Inter_400Regular",
+        color: '#666',
+        marginTop: 2,
     },
 });
