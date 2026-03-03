@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         paddingHorizontal: 20,
-        paddingBottom: 150, // Space for custom tab bar
+        paddingBottom: 100, // Space for custom tab bar
     },
     scrollView: {
         flex: 1,
@@ -418,13 +418,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 10,
         backgroundColor: '#fff',
-        padding: 10,
+        padding: 14,
         borderRadius: 12,
         borderWidth: 1,
         borderColor: '#F0F0F0',
     },
     healthGuideIconContainer: {
-        width: 36,
+        width: 38,
         height: 36,
         borderRadius: 18,
         justifyContent: 'center',
@@ -436,7 +436,7 @@ const styles = StyleSheet.create({
         color: '#000',
     },
     healthItemDesc: {
-        fontSize: 10,
+        fontSize: 8,
         fontFamily: "Inter_400Regular",
         color: '#666',
         marginTop: 2,

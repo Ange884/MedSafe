@@ -253,7 +253,7 @@ const styles = StyleSheet.create({
         gap: 10,
         borderTopWidth: 1,
         borderTopColor: "#f0f0f0",
-        marginBottom: 120, // Tab bar space
+        marginBottom: 5, // Tab bar space
     },
     footerTextInput: {
         flex: 1,

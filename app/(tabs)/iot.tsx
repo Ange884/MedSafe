@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import {
     ScrollView,
     StyleSheet,
@@ -14,7 +14,28 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function IotScreen() {
     const router = useRouter();
-    const batteryLevel = 69;
+    const [batteryLevel, setBatteryLevel] = useState(69);
+    const [barWidth, setBarWidth] = useState(0);
+
+    const handleBatteryTouch = (event: any) => {
+        if (barWidth > 0) {
+            const touchX = event.nativeEvent.locationX;
+            const newLevel = Math.max(0, Math.min(100, Math.round((touchX / barWidth) * 100)));
+            setBatteryLevel(newLevel);
+        }
+    };
+
+    const batteryLevelDisplay = Math.max(0, Math.min(100, batteryLevel));
+
+    const [snoozedOptions, setSnoozedOptions] = useState<string[]>(["Resync"]);
+
+    const toggleSnoozeOption = (option: string) => {
+        if (snoozedOptions.includes(option)) {
+            setSnoozedOptions(snoozedOptions.filter(o => o !== option));
+        } else {
+            setSnoozedOptions([...snoozedOptions, option]);
+        }
+    };
 
     const usageData = [
         { id: 1, action: "Dose detected", time: "12:40 PM", date: "02 May 2026" },
@@ -72,19 +93,25 @@ export default function IotScreen() {
                         <Text style={styles.batteryLabelRed}>Low</Text>
                     </View>
 
-                    <View style={styles.batteryBarWrapper}>
+                    <View
+                        style={styles.batteryBarWrapper}
+                        onLayout={(e) => setBarWidth(e.nativeEvent.layout.width)}
+                        onStartShouldSetResponder={() => true}
+                        onResponderGrant={handleBatteryTouch}
+                        onResponderMove={handleBatteryTouch}
+                    >
                         <LinearGradient
-                            colors={['#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#F44336']}
-                            start={{ x: 0, y: 0.5 }}
-                            end={{ x: 1, y: 0.5 }}
+                            colors={['#F44336', '#FF9800', '#FFC107', '#FFEB3B', '#CDDC39', '#8BC34A', '#4CAF50']}
+                            start={{ x: 1, y: 0.5 }}
+                            end={{ x: 0, y: 0.5 }}
                             style={styles.batteryGradient}
                         />
-                        <View style={[styles.batteryPointer, { left: `${batteryLevel}%` }]}>
+                        <View style={[styles.batteryPointer, { left: `${batteryLevelDisplay}%` }]}>
                             <View style={styles.pointerLine} />
                             <Ionicons name="caret-down" size={12} color="#000" style={styles.pointerIcon} />
                         </View>
                     </View>
-                    <Text style={[styles.batteryValueText, { left: `${batteryLevel}%`, marginLeft: -15 }]}>{batteryLevel}%</Text>
+                    <Text style={[styles.batteryValueText, { left: `${batteryLevelDisplay}%`, marginLeft: -15 }]}>{batteryLevelDisplay}%</Text>
                 </View>
 
                 <View style={styles.section}>
@@ -95,18 +122,39 @@ export default function IotScreen() {
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Snooze options</Text>
                     <View style={styles.snoozeOptions}>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="checkbox" size={24} color="#000" />
+                        <TouchableOpacity
+                            style={styles.optionItem}
+                            onPress={() => toggleSnoozeOption("Resync")}
+                        >
+                            <Ionicons
+                                name={snoozedOptions.includes("Resync") ? "checkbox" : "square-outline"}
+                                size={24}
+                                color={snoozedOptions.includes("Resync") ? "#000" : "#CCC"}
+                            />
                             <Text style={styles.optionText}>Resync</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.optionItem}
+                            onPress={() => toggleSnoozeOption("Calibrate")}
+                        >
+                            <Ionicons
+                                name={snoozedOptions.includes("Calibrate") ? "checkbox" : "square-outline"}
+                                size={24}
+                                color={snoozedOptions.includes("Calibrate") ? "#000" : "#CCC"}
+                            />
                             <Text style={styles.optionText}>Calibrate</Text>
-                        </View>
-                        <View style={styles.optionItem}>
-                            <Ionicons name="square-outline" size={24} color="#CCC" />
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={styles.optionItem}
+                            onPress={() => toggleSnoozeOption("Test alert")}
+                        >
+                            <Ionicons
+                                name={snoozedOptions.includes("Test alert") ? "checkbox" : "square-outline"}
+                                size={24}
+                                color={snoozedOptions.includes("Test alert") ? "#000" : "#CCC"}
+                            />
                             <Text style={styles.optionText}>Test alert</Text>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 
@@ -115,7 +163,7 @@ export default function IotScreen() {
                     <Text style={styles.usageSubtitle}>Device connected at 7:26 AM</Text>
 
                     {usageData.map((item) => (
-                        <View key={item.id} style={styles.usageCard}>
+                        <TouchableOpacity key={item.id} style={styles.usageCard} activeOpacity={0.7}>
                             <View style={styles.usageCardLeft}>
                                 <View style={styles.bellIconContainer}>
                                     <Ionicons name="notifications" size={24} color="#000" />
@@ -126,7 +174,7 @@ export default function IotScreen() {
                             <View style={styles.usageCardRight}>
                                 <Text style={styles.usageTimestamp}>{item.time}   {item.date}</Text>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                     ))}
                 </View>
 

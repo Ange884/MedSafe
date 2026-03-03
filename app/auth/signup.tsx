@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   },
 
   imageContainer: {
-    height: height * 0.5, // ✅ exactly 50% of screen
+    height: 400, // ✅ exactly 50% of screen
   },
 
   image: {
