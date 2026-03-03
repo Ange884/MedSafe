@@ -88,7 +88,7 @@ export default function NotificationsScreen() {
                 </TouchableOpacity>
             </View>
 
-            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+            <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
                 {notifications.map((item) => (
                     <TouchableOpacity key={item.id} style={[styles.notificationCard, !item.read && styles.unreadCard]}>
                         <View style={[styles.iconContainer, { backgroundColor: getIconColor(item.type) + '15' }]}>
@@ -138,6 +138,9 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         padding: 20,
+    },
+    scrollView: {
+        flex: 1,
     },
     notificationCard: {
         flexDirection: "row",

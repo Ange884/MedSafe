@@ -24,7 +24,9 @@ export default function HomeScreen() {
     };
     return (
         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}
+            <ScrollView
+                style={styles.scrollView}
+                showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}>
 
                 {/* Header */}
@@ -179,6 +181,9 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingHorizontal: 20,
         paddingBottom: 150, // Space for custom tab bar
+    },
+    scrollView: {
+        flex: 1,
     },
     header: {
         flexDirection: "row",

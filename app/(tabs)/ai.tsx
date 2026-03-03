@@ -87,7 +87,7 @@ export default function AiScreen() {
                     <View style={{ width: 24 }} />
                 </View>
 
-                <ScrollView contentContainerStyle={styles.chatScroll}>
+                <ScrollView style={styles.scrollView} contentContainerStyle={styles.chatScroll}>
                     {chatHistory.map((item) => (
                         <View key={item.id} style={item.type === "bot" ? styles.botMessage : styles.userMessage}>
                             <Text style={item.type === "bot" ? styles.botText : styles.userText}>{item.text}</Text>
@@ -214,6 +214,9 @@ const styles = StyleSheet.create({
     chatScroll: {
         padding: 20,
         paddingBottom: 40,
+    },
+    scrollView: {
+        flex: 1,
     },
     botMessage: {
         alignSelf: "flex-start",

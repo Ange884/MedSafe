@@ -35,7 +35,7 @@ export default function ProfileScreen() {
                 </View>
             </View>
 
-            <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+            <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
                 <View style={styles.avatarCard}>
                     <Ionicons name="person" size={160} color="#000" />
                 </View>
@@ -146,6 +146,9 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         paddingBottom: 40,
+    },
+    scrollView: {
+        flex: 1,
     },
     avatarCard: {
         width: "100%",

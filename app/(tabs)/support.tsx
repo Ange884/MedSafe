@@ -56,6 +56,7 @@ export default function SupportScreen() {
             </View>
 
             <ScrollView
+                style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
             >
@@ -232,6 +233,9 @@ const styles = StyleSheet.create({
     },
     scrollContent: {
         paddingHorizontal: 20,
+    },
+    scrollView: {
+        flex: 1,
     },
     title: {
         fontSize: 28,

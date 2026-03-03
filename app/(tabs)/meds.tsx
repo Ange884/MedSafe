@@ -80,6 +80,7 @@ export default function MedsScreen() {
             <Text style={styles.title}>Your Medications</Text>
 
             <ScrollView
+                style={styles.scrollView}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.scrollContent}
             >
@@ -230,6 +231,9 @@ const styles = StyleSheet.create({
     scrollContent: {
         paddingHorizontal: 20,
         paddingBottom: 40,
+    },
+    scrollView: {
+        flex: 1,
     },
     card: {
         backgroundColor: '#fff',
